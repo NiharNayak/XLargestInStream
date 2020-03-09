@@ -1,7 +1,7 @@
 package com.nihar.timeseries.data.analysis.run;
 
 import com.nihar.timeseries.data.analysis.bin.UniqueIDAndValue;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -29,8 +29,9 @@ public class FindXLargest {
           new PriorityQueue<>(findXLargest.xValue); // Extra Space Complexity O(xValue)
       Scanner inputScanner;
       if (args.length > 1) {
-        // Scanner will read the file content as line by line. should be fine for large files.
-        inputScanner = new Scanner(new File(args[1]));
+        // Scanner & FileInputStream will read the file content as line by line.
+        // Doesn't load the whole file in memory so can be used for large files.
+        inputScanner = new Scanner(new FileInputStream(args[0]));
         while (inputScanner.hasNext()) {
           findXLargest.addOrUpdateToHeap(inputScanner.nextLine());
         }
